@@ -1,0 +1,42 @@
+name: Data validate
+
+on:
+  pull_request:
+    paths:
+      - 'data/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+
+      # §12.5: schema-validate data/gpudb.json, data/cpudb.json,
+      # data/coefficients.json, data/requirements/*.json, and reject any
+      # cpu/gpu any_of entry whose canonical ID isn't in gpudb.json/cpudb.json.
+      - name: validate data/
+        run: go run ./tools/datavalidate
+
+      # §5.5: this PR touched data/, which is exactly what the tier drift
+      # guard exists to check — a coefficients.json (or gpudb.json/cpudb.json)
+      # change that shifts an unrelated part's tier must fail here, not
+      # silently ship. (TestTierDriftGuard also runs as part of the main CI
+      # job's `go test ./...`; it's called out explicitly here too so a
+      # data/ PR's own checks make the attribution obvious without having to
+      # cross-reference the other workflow.)
+      - name: tier drift guard
+        run: go test ./internal/score/... -run TestTierDriftGuard -v
+
+      - name: datavalidate unit tests
+        run: go test ./tools/datavalidate/...

@@ -1,0 +1,7 @@
+/dist/
+/rigfit
+/rigfit.exe
+coverage.out
+*.test
+.claude/settings.local.json
+/cmd/rigfit/*.syso

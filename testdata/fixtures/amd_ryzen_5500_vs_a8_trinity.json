@@ -1,0 +1,14 @@
+{
+  "description": "AMD Ryzen 5 5500 (Zen3, family 25 model 80) with a discrete GPU; golden coverage alongside the dedicated TestRyzen5500NeverResolvesToA8Trinity regression test",
+  "cpu": {"vendor_id": "AuthenticAMD", "family": 25, "model": 80, "stepping": 0, "phys_cores": 6, "logical_cores": 12},
+  "gpus": [
+    {"vendor_id": "0x1002", "device_id": "0x73a5", "subsystem_id": "0x0", "vram_bytes": 17179869184}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "amd-ryzen-5-5500", "confidence": "exact"},
+    "gpus": [
+      {"canonical_id": "amd-radeon-rx-6950-xt", "confidence": "exact", "is_renderer": true, "is_discrete": true}
+    ]
+  }
+}

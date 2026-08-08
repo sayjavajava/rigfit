@@ -1,0 +1,52 @@
+name: Hardware report
+description: Report hardware rigfit didn't recognise (unknown CPU or GPU)
+title: "Hardware report: "
+labels: ["hardware-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow rigfit's hardware coverage. The easiest way to fill this out correctly is to run `rigfit report-unknown` first — it writes the JSON below to your cache directory and prints a URL that pre-fills most of this form for you. If you used that URL to get here, the dump is already pasted in below; you can skip straight to the extra context fields.
+
+  - type: textarea
+    id: dump
+    attributes:
+      label: Anonymised hardware dump
+      description: Paste the full output of `rigfit report-unknown` (or `rigfit dump --anonymous`) here. It contains only hardware identity fields — no serials, hostnames, MAC addresses, or filesystem paths (see PRIVACY.md).
+      render: json
+      placeholder: |
+        {
+          "schema_version": 1,
+          "os": "windows",
+          "arch": "amd64",
+          "cpu": { "...": "..." },
+          "gpus": [ { "...": "..." } ]
+        }
+    validations:
+      required: true
+
+  - type: input
+    id: cpu-model
+    attributes:
+      label: Actual CPU model (if known)
+      description: What the box/spec sheet actually calls it, e.g. "AMD Ryzen 5 8500G". Helps confirm what the unrecognised family/model/stepping tuple should resolve to.
+      placeholder: e.g. AMD Ryzen 5 8500G
+    validations:
+      required: false
+
+  - type: input
+    id: gpu-model
+    attributes:
+      label: Actual GPU model (if known)
+      description: What the box/driver panel actually calls it, e.g. "NVIDIA GeForce RTX 4060 Laptop GPU".
+      placeholder: e.g. NVIDIA GeForce RTX 4060 Laptop GPU
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else worth knowing
+      description: Laptop vs desktop, hybrid graphics setup, unusual OEM rebadge, anything that might explain why this part wasn't recognised.
+    validations:
+      required: false

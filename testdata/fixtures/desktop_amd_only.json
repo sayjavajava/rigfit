@@ -1,0 +1,14 @@
+{
+  "description": "Desktop, AMD Ryzen 7 7700 + single discrete AMD Radeon RX 6950 XT, no iGPU present",
+  "cpu": {"vendor_id": "AuthenticAMD", "family": 25, "model": 97, "stepping": 0, "phys_cores": 8, "logical_cores": 16},
+  "gpus": [
+    {"vendor_id": "0x1002", "device_id": "0x73a5", "subsystem_id": "0x0", "vram_bytes": 17179869184}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "amd-ryzen-7-7700", "confidence": "exact"},
+    "gpus": [
+      {"canonical_id": "amd-radeon-rx-6950-xt", "confidence": "exact", "is_renderer": true, "is_discrete": true}
+    ]
+  }
+}

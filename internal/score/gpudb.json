@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "note": "Seed set: ~25 reference GPUs across 6 architectures for the §5.5 drift guard. Full ~300-GPU coverage is maintainer/contributor-sourced per §2A and lands incrementally via tools/dbbuild. Spec-sheet fields (shader_units, boost_clock_ghz, bus_width_bits, effective_mem_clock_ghz) are manufacturer-published facts; architecture coefficients live in coefficients.json and are documented in data/METHODOLOGY.md. AMD RDNA2/RDNA3 and Intel entries are deliberately sparse: several well-known desktop SKUs (e.g. RX 6600, 6700 XT, 6800 XT, 7600, 7700 XT, 7900 XT/XTX) share one PCI device ID with sibling SKUs in the vendored pci.ids snapshot, so a single spec-sheet entry cannot be assigned to them without misattributing shader counts to the wrong sibling — they are correctly Unknown for scoring until subsystem-level or contributor-sourced disambiguation is added, per §1.",
+  "gpus": [
+    {
+      "canonical_id": "amd-radeon-rx-6900-xt",
+      "market_name": "Navi 21 [Radeon RX 6900 XT]",
+      "architecture": "amd-rdna2",
+      "shader_units": 5120,
+      "boost_clock_ghz": 2.25,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 16
+    },
+    {
+      "canonical_id": "amd-radeon-rx-6950-xt",
+      "market_name": "Navi 21 [Radeon RX 6950 XT]",
+      "architecture": "amd-rdna2",
+      "shader_units": 5120,
+      "boost_clock_ghz": 2.31,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 18
+    },
+    {
+      "canonical_id": "intel-arc-a750",
+      "market_name": "DG2 [Arc A750]",
+      "architecture": "intel-alchemist",
+      "shader_units": 3584,
+      "boost_clock_ghz": 2.05,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 16
+    },
+    {
+      "canonical_id": "intel-arc-a770",
+      "market_name": "DG2 [Arc A770]",
+      "architecture": "intel-alchemist",
+      "shader_units": 4096,
+      "boost_clock_ghz": 2.1,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 17.5
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1050-ti",
+      "market_name": "GP107 [GeForce GTX 1050 Ti]",
+      "architecture": "nvidia-pascal",
+      "shader_units": 768,
+      "boost_clock_ghz": 1.392,
+      "bus_width_bits": 128,
+      "effective_mem_clock_ghz": 7
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1060-6gb",
+      "market_name": "GP106 [GeForce GTX 1060 6GB]",
+      "architecture": "nvidia-pascal",
+      "shader_units": 1280,
+      "boost_clock_ghz": 1.708,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 8
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1070",
+      "market_name": "GP104 [GeForce GTX 1070]",
+      "architecture": "nvidia-pascal",
+      "shader_units": 1920,
+      "boost_clock_ghz": 1.683,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 8
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1080",
+      "market_name": "GP104 [GeForce GTX 1080]",
+      "architecture": "nvidia-pascal",
+      "shader_units": 2560,
+      "boost_clock_ghz": 1.733,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 10
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1080-ti",
+      "market_name": "GP102 [GeForce GTX 1080 Ti]",
+      "architecture": "nvidia-pascal",
+      "shader_units": 3584,
+      "boost_clock_ghz": 1.582,
+      "bus_width_bits": 352,
+      "effective_mem_clock_ghz": 11
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1660",
+      "market_name": "TU116 [GeForce GTX 1660]",
+      "architecture": "nvidia-turing",
+      "shader_units": 1408,
+      "boost_clock_ghz": 1.785,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 8
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1660-ti",
+      "market_name": "TU116 [GeForce GTX 1660 Ti]",
+      "architecture": "nvidia-turing",
+      "shader_units": 1536,
+      "boost_clock_ghz": 1.77,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 12
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2060",
+      "market_name": "TU104 [GeForce RTX 2060]",
+      "architecture": "nvidia-turing",
+      "shader_units": 1920,
+      "boost_clock_ghz": 1.68,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2070",
+      "market_name": "TU106 [GeForce RTX 2070]",
+      "architecture": "nvidia-turing",
+      "shader_units": 2304,
+      "boost_clock_ghz": 1.62,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2080",
+      "market_name": "TU104 [GeForce RTX 2080]",
+      "architecture": "nvidia-turing",
+      "shader_units": 2944,
+      "boost_clock_ghz": 1.71,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2080-ti",
+      "market_name": "TU102 [GeForce RTX 2080 Ti]",
+      "architecture": "nvidia-turing",
+      "shader_units": 4352,
+      "boost_clock_ghz": 1.545,
+      "bus_width_bits": 352,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3060",
+      "market_name": "GA104 [GeForce RTX 3060]",
+      "architecture": "nvidia-ampere",
+      "shader_units": 3584,
+      "boost_clock_ghz": 1.777,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 15
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3060-ti",
+      "market_name": "GA104 [GeForce RTX 3060 Ti]",
+      "architecture": "nvidia-ampere",
+      "shader_units": 4864,
+      "boost_clock_ghz": 1.665,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3070",
+      "market_name": "GA104 [GeForce RTX 3070]",
+      "architecture": "nvidia-ampere",
+      "shader_units": 5888,
+      "boost_clock_ghz": 1.725,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3080",
+      "market_name": "GA102 [GeForce RTX 3080]",
+      "architecture": "nvidia-ampere",
+      "shader_units": 8704,
+      "boost_clock_ghz": 1.71,
+      "bus_width_bits": 320,
+      "effective_mem_clock_ghz": 19
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3090",
+      "market_name": "GA102 [GeForce RTX 3090]",
+      "architecture": "nvidia-ampere",
+      "shader_units": 10496,
+      "boost_clock_ghz": 1.695,
+      "bus_width_bits": 384,
+      "effective_mem_clock_ghz": 19.5
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4060",
+      "market_name": "AD107 [GeForce RTX 4060]",
+      "architecture": "nvidia-ada",
+      "shader_units": 3072,
+      "boost_clock_ghz": 2.46,
+      "bus_width_bits": 128,
+      "effective_mem_clock_ghz": 17
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4070",
+      "market_name": "AD104 [GeForce RTX 4070]",
+      "architecture": "nvidia-ada",
+      "shader_units": 5888,
+      "boost_clock_ghz": 2.475,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 21
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4070-ti",
+      "market_name": "AD104 [GeForce RTX 4070 Ti]",
+      "architecture": "nvidia-ada",
+      "shader_units": 7680,
+      "boost_clock_ghz": 2.61,
+      "bus_width_bits": 192,
+      "effective_mem_clock_ghz": 21
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4080",
+      "market_name": "AD103 [GeForce RTX 4080]",
+      "architecture": "nvidia-ada",
+      "shader_units": 9728,
+      "boost_clock_ghz": 2.505,
+      "bus_width_bits": 256,
+      "effective_mem_clock_ghz": 22.4
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4090",
+      "market_name": "AD102 [GeForce RTX 4090]",
+      "architecture": "nvidia-ada",
+      "shader_units": 16384,
+      "boost_clock_ghz": 2.52,
+      "bus_width_bits": 384,
+      "effective_mem_clock_ghz": 21
+    }
+  ]
+}

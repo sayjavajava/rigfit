@@ -1,0 +1,56 @@
+name: winget
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  winget:
+    name: Publish winget manifest
+    # wingetcreate is a Windows-native .NET tool; windows-latest is a
+    # GitHub-hosted runner (§12.1 forbids self-hosted runners, not
+    # non-Linux hosted ones).
+    runs-on: windows-latest
+    # §12.6: "This workflow MUST tolerate rejection: a failed winget PR
+    # MUST NOT fail the release." release.yml has already succeeded by
+    # the time this "release published" event fires — see aur.yml for
+    # the same pattern.
+    continue-on-error: true
+    steps:
+      - name: Compute release metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "url=https://github.com/${{ github.repository }}/releases/download/${GITHUB_REF_NAME}/rigfit_${version}_windows_amd64.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Install wingetcreate
+        shell: pwsh
+        run: Invoke-WebRequest -Uri https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+
+      # `update` bumps version/URL/hash on the EXISTING sayjavajava.rigfit
+      # manifest and otherwise leaves it alone — there is no per-run flag
+      # for InstallerType because winget-create's `update` command doesn't
+      # support setting it (verified against microsoft/winget-create's own
+      # docs/update.md: its only overrides are architecture/scope, via a
+      # `url|arch|scope` pipe syntax). §12.6 requires
+      # `InstallerType: portable`; that has to be set correctly ONCE, when
+      # the package is first submitted to winget-pkgs (see
+      # docs/RELEASE-SETUP.md's "First winget submission" section) — this
+      # workflow only ever updates an already-portable manifest, matching
+      # goreleaser.yaml's single windows/amd64 zip artifact (no
+      # windows/arm64 build, so only one URL).
+      - name: Submit winget manifest update
+        shell: pwsh
+        run: |
+          ./wingetcreate.exe update sayjavajava.rigfit `
+            --version "${{ steps.meta.outputs.version }}" `
+            --urls "${{ steps.meta.outputs.url }}" `
+            --submit `
+            --no-open `
+            --token "${{ secrets.WINGET_PAT }}"

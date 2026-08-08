@@ -1,0 +1,16 @@
+{
+  "description": "Laptop, Intel Core i7-7700 with integrated UHD Graphics plus a discrete NVIDIA RTX 3080 dGPU; the discrete GPU must be selected as renderer and the iGPU must still be reported",
+  "cpu": {"vendor_id": "GenuineIntel", "family": 6, "model": 158, "stepping": 9, "phys_cores": 4, "logical_cores": 8},
+  "gpus": [
+    {"vendor_id": "0x8086", "device_id": "0x46a3", "subsystem_id": "0x0", "vram_bytes": 0},
+    {"vendor_id": "0x10de", "device_id": "0x2206", "subsystem_id": "0x0", "vram_bytes": 10737418240}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "intel-core-i7-7700", "confidence": "exact"},
+    "gpus": [
+      {"canonical_id": "intel-uhd-graphics", "confidence": "exact", "is_renderer": false, "is_discrete": false},
+      {"canonical_id": "nvidia-geforce-rtx-3080", "confidence": "exact", "is_renderer": true, "is_discrete": true}
+    ]
+  }
+}

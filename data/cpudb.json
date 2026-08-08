@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "note": "Seed set. Full spec-sheet-driven coverage (~400 CPUs) lands incrementally via tools/dbbuild per rigfit-BUILD-SPEC.md §2A/§13. all_core_clock_mhz and architecture are scoring-only fields (§5.2), consumed by internal/score, not pkg/hwid identity resolution.",
+  "cpus": [
+    {
+      "canonical_id": "amd-a8-5500",
+      "market_name": "AMD A8-5500 (Trinity)",
+      "vendor_id": "AuthenticAMD",
+      "family": 21,
+      "model": 16,
+      "steppings": [],
+      "phys_cores": 4,
+      "logical_cores": 4,
+      "base_clock_mhz": 3200,
+      "all_core_clock_mhz": 3200,
+      "architecture": "amd-piledriver"
+    },
+    {
+      "canonical_id": "amd-ryzen-5-5500",
+      "market_name": "AMD Ryzen 5 5500",
+      "vendor_id": "AuthenticAMD",
+      "family": 25,
+      "model": 80,
+      "steppings": [],
+      "phys_cores": 6,
+      "logical_cores": 12,
+      "base_clock_mhz": 3600,
+      "all_core_clock_mhz": 4000,
+      "architecture": "amd-zen3"
+    },
+    {
+      "canonical_id": "amd-ryzen-7-7700",
+      "market_name": "AMD Ryzen 7 7700",
+      "vendor_id": "AuthenticAMD",
+      "family": 25,
+      "model": 97,
+      "steppings": [],
+      "phys_cores": 8,
+      "logical_cores": 16,
+      "base_clock_mhz": 3800,
+      "all_core_clock_mhz": 4700,
+      "architecture": "amd-zen4"
+    },
+    {
+      "canonical_id": "intel-core-i5-8400",
+      "market_name": "Intel Core i5-8400",
+      "vendor_id": "GenuineIntel",
+      "family": 6,
+      "model": 158,
+      "steppings": [
+        10
+      ],
+      "phys_cores": 6,
+      "logical_cores": 6,
+      "base_clock_mhz": 2800,
+      "all_core_clock_mhz": 3800,
+      "architecture": "intel-skylake"
+    },
+    {
+      "canonical_id": "intel-core-i7-7700",
+      "market_name": "Intel Core i7-7700",
+      "vendor_id": "GenuineIntel",
+      "family": 6,
+      "model": 158,
+      "steppings": [
+        9
+      ],
+      "phys_cores": 4,
+      "logical_cores": 8,
+      "base_clock_mhz": 3600,
+      "all_core_clock_mhz": 4000,
+      "architecture": "intel-skylake"
+    }
+  ]
+}

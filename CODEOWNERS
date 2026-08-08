@@ -1,0 +1,5 @@
+# Tier coefficients and the scoring engine directly control the numbers
+# rigfit reports to users; changes here require owner review regardless of
+# who else has approved.
+/data/coefficients.json @sayjavajava
+/internal/score/        @sayjavajava

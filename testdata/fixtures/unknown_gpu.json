@@ -1,0 +1,14 @@
+{
+  "description": "Recognised CPU paired with a GPU whose PCI vendor ID is not in pci.ids at all; must report ConfidenceUnknown, not a guess",
+  "cpu": {"vendor_id": "GenuineIntel", "family": 6, "model": 158, "stepping": 9, "phys_cores": 4, "logical_cores": 8},
+  "gpus": [
+    {"vendor_id": "0x1234", "device_id": "0x5678", "subsystem_id": "0x0", "vram_bytes": 0}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "intel-core-i7-7700", "confidence": "exact"},
+    "gpus": [
+      {"canonical_id": "", "confidence": "unknown", "is_renderer": true, "is_discrete": false}
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "description": "Recognised GPU paired with a CPU vendor/family/model/stepping tuple not present in cpudb.json (e.g. a newer generation not yet catalogued); must report ConfidenceUnknown, not a guess from the family alone",
+  "cpu": {"vendor_id": "GenuineIntel", "family": 6, "model": 170, "stepping": 2, "phys_cores": 6, "logical_cores": 14},
+  "gpus": [
+    {"vendor_id": "0x10de", "device_id": "0x2206", "subsystem_id": "0x0", "vram_bytes": 10737418240}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "", "confidence": "unknown"},
+    "gpus": [
+      {"canonical_id": "nvidia-geforce-rtx-3080", "confidence": "exact", "is_renderer": true, "is_discrete": true}
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "gpu_arch": {
+    "nvidia-pascal":     { "coefficient": 1.00, "note": "reference architecture — the baseline GPU (GTX 1060 6GB, §5.3) is Pascal, so this anchors BASELINE_PERF directly.", "source_refs": [] },
+    "nvidia-turing":      { "coefficient": 1.35, "note": "calibrated so RTX 2070 ~= GTX 1080 Ti (well-known 2018 launch consensus); see data/METHODOLOGY.md", "source_refs": [] },
+    "nvidia-ampere":      { "coefficient": 1.15, "note": "calibrated so RTX 3070 ~= RTX 2080 Ti (NVIDIA's own launch claim); see data/METHODOLOGY.md", "source_refs": [] },
+    "nvidia-ada":         { "coefficient": 1.32, "note": "calibrated so RTX 4070 Ti ~= RTX 3090 (commonly cited launch comparison); see data/METHODOLOGY.md", "source_refs": [] },
+    "amd-rdna2":          { "coefficient": 1.56, "note": "calibrated so RX 6900 XT ~= RTX 3080 (well-known launch rivalry); partly compensates for Infinity Cache effective bandwidth the formula doesn't model directly — see data/METHODOLOGY.md", "source_refs": [] },
+    "intel-alchemist":    { "coefficient": 1.03, "note": "calibrated so Arc A770 ~= RTX 3060 Ti (commonly cited launch comparison); consistent with Arc's well-documented weak per-FLOP gaming efficiency at launch — see data/METHODOLOGY.md", "source_refs": [] }
+  },
+  "cpu_ipc": {
+    "intel-skylake":     { "coefficient": 1.00, "note": "reference architecture — the baseline CPU (Core i5-8400) is Skylake-derived (also covers Kaby Lake/Coffee Lake, near-identical per-core IPC).", "source_refs": [] },
+    "amd-zen3":          { "coefficient": 1.05, "note": "estimate: Zen3 gaming IPC widely reported roughly on par with or slightly ahead of contemporary Skylake-class parts; see data/METHODOLOGY.md", "source_refs": [] },
+    "amd-zen4":          { "coefficient": 1.18, "note": "estimate: zen3 x AMD's own ~13% claimed IPC uplift for Zen4; see data/METHODOLOGY.md", "source_refs": [] },
+    "amd-piledriver":    { "coefficient": 0.55, "note": "estimate: Bulldozer-family IPC is well-documented as far below contemporary Intel cores; low-confidence rough estimate spanning a wide generation gap — see data/METHODOLOGY.md", "source_refs": [] }
+  }
+}

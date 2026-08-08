@@ -1,0 +1,74 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+    # §2's MUST "Embed Windows version-info resource (product name,
+    # version, description)": GoReleaser has no native support for this,
+    # so go-winres generates a .syso from winres/winres.json before the
+    # build step compiles cmd/rigfit — Go automatically links a .syso
+    # placed in a package directory into that package's Windows build.
+    # This is a build-time-only tool (like govulncheck in ci.yml), never
+    # a module dependency of the shipped binary. Verified locally: the
+    # resulting .exe correctly reports ProductName/FileDescription/
+    # FileVersion/ProductVersion in Windows' own file properties.
+    - go run github.com/tc-hib/go-winres@v0.3.3 make --in winres/winres.json --out cmd/rigfit/rigfit --product-version=git-tag --file-version=git-tag --arch amd64
+
+builds:
+  - id: rigfit
+    main: ./cmd/rigfit
+    binary: rigfit
+    env: [CGO_ENABLED=0]
+    flags: [-trimpath]
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.CommitDate}}
+    goos: [linux, windows, darwin]
+    goarch: [amd64, arm64]
+    ignore:
+      - goos: windows
+        goarch: arm64
+    mod_timestamp: '{{ .CommitTimestamp }}' # reproducible builds
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip] # zip on Windows; may strip MOTW
+    files: [README.md, LICENSE, PRIVACY.md, SECURITY.md]
+
+checksum:
+  name_template: 'checksums.txt'
+
+signs:
+  - artifacts: checksum
+    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}",
+           "--output", "${signature}", "--detach-sign", "${artifact}"]
+
+sboms:
+  - artifacts: archive
+
+scoops:
+  - repository:
+      owner: sayjavajava
+      name: scoop-rigfit
+      branch: main
+      token: "{{ .Env.SCOOP_TAP_TOKEN }}"
+    homepage: https://github.com/sayjavajava/rigfit
+    description: Correct, local-first game compatibility checker
+    license: GPL-3.0-only
+
+release:
+  draft: false
+  footer: |
+    ## Verify this release
+    ```
+    gh attestation verify rigfit_<version>_<os>_<arch>.tar.gz --repo sayjavajava/rigfit
+    gpg --verify checksums.txt.sig checksums.txt
+    ```
+
+changelog:
+  use: github
+  sort: asc

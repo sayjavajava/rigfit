@@ -1,0 +1,14 @@
+{
+  "description": "Desktop, Intel Core i7-7700 + single discrete NVIDIA GTX 1660 Ti, no iGPU present",
+  "cpu": {"vendor_id": "GenuineIntel", "family": 6, "model": 158, "stepping": 9, "phys_cores": 4, "logical_cores": 8},
+  "gpus": [
+    {"vendor_id": "0x10de", "device_id": "0x2182", "subsystem_id": "0x0", "vram_bytes": 6442450944}
+  ],
+  "gpu_override": "",
+  "expect": {
+    "cpu": {"canonical_id": "intel-core-i7-7700", "confidence": "exact"},
+    "gpus": [
+      {"canonical_id": "nvidia-geforce-gtx-1660-ti", "confidence": "exact", "is_renderer": true, "is_discrete": true}
+    ]
+  }
+}

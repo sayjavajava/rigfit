@@ -1,0 +1,53 @@
+name: aur
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  aur:
+    name: Publish AUR package
+    runs-on: ubuntu-latest
+    # §12.6: AUR publishing MUST NOT block or fail the release itself —
+    # the release job (release.yml) has already succeeded by the time
+    # this "release published" event fires.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Compute release metadata
+        id: meta
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          checksums_url="https://github.com/${{ github.repository }}/releases/download/${GITHUB_REF_NAME}/checksums.txt"
+          curl -sL --fail -o checksums.txt "$checksums_url"
+
+          asset="rigfit_${version}_linux_amd64.tar.gz"
+          sha256=$(grep -F " ${asset}" checksums.txt | awk '{print $1}')
+          if [ -z "$sha256" ]; then
+            echo "::error::could not find a checksum for ${asset} in checksums.txt"
+            exit 1
+          fi
+          echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Render PKGBUILD
+        run: |
+          sed -e "s/@VERSION@/${{ steps.meta.outputs.version }}/g" \
+              -e "s/@SHA256@/${{ steps.meta.outputs.sha256 }}/g" \
+              aur/PKGBUILD.template > PKGBUILD
+
+      - name: Publish to AUR
+        uses: KSXGitHub/github-actions-deploy-aur@084b0d9b15415bf9cdb65d44dad1efe37a354050 # v4.2.0
+        with:
+          pkgname: rigfit-bin
+          pkgbuild: ./PKGBUILD
+          commit_username: rigfit-release-bot
+          commit_email: rigfit-release-bot@users.noreply.github.com
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: "rigfit-bin ${{ steps.meta.outputs.version }}"

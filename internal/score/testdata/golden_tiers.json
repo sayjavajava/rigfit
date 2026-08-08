@@ -1,0 +1,156 @@
+{
+  "gpus": [
+    {
+      "canonical_id": "amd-radeon-rx-6900-xt",
+      "market_name": "Radeon RX 6900 XT",
+      "tier": 32
+    },
+    {
+      "canonical_id": "amd-radeon-rx-6950-xt",
+      "market_name": "Radeon RX 6950 XT",
+      "tier": 32
+    },
+    {
+      "canonical_id": "intel-arc-a750",
+      "market_name": "Arc A750",
+      "tier": 23
+    },
+    {
+      "canonical_id": "intel-arc-a770",
+      "market_name": "Arc A770",
+      "tier": 25
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1050-ti",
+      "market_name": "GeForce GTX 1050 Ti",
+      "tier": 2
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1060-6gb",
+      "market_name": "GeForce GTX 1060 6GB",
+      "tier": 10
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1070",
+      "market_name": "GeForce GTX 1070",
+      "tier": 14
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1080",
+      "market_name": "GeForce GTX 1080",
+      "tier": 17
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1080-ti",
+      "market_name": "GeForce GTX 1080 Ti",
+      "tier": 21
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1660",
+      "market_name": "GeForce GTX 1660",
+      "tier": 15
+    },
+    {
+      "canonical_id": "nvidia-geforce-gtx-1660-ti",
+      "market_name": "GeForce GTX 1660 Ti",
+      "tier": 17
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2060",
+      "market_name": "GeForce RTX 2060",
+      "tier": 19
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2070",
+      "market_name": "GeForce RTX 2070",
+      "tier": 21
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2080",
+      "market_name": "GeForce RTX 2080",
+      "tier": 23
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-2080-ti",
+      "market_name": "GeForce RTX 2080 Ti",
+      "tier": 27
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3060",
+      "market_name": "GeForce RTX 3060",
+      "tier": 22
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3060-ti",
+      "market_name": "GeForce RTX 3060 Ti",
+      "tier": 25
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3070",
+      "market_name": "GeForce RTX 3070",
+      "tier": 27
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3080",
+      "market_name": "GeForce RTX 3080",
+      "tier": 32
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-3090",
+      "market_name": "GeForce RTX 3090",
+      "tier": 34
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4060",
+      "market_name": "GeForce RTX 4060",
+      "tier": 24
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4070",
+      "market_name": "GeForce RTX 4070",
+      "tier": 31
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4070-ti",
+      "market_name": "GeForce RTX 4070 Ti",
+      "tier": 34
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4080",
+      "market_name": "GeForce RTX 4080",
+      "tier": 37
+    },
+    {
+      "canonical_id": "nvidia-geforce-rtx-4090",
+      "market_name": "GeForce RTX 4090",
+      "tier": 42
+    }
+  ],
+  "cpus": [
+    {
+      "canonical_id": "amd-a8-5500",
+      "market_name": "AMD A8-5500 (Trinity)",
+      "tier": -2
+    },
+    {
+      "canonical_id": "amd-ryzen-5-5500",
+      "market_name": "AMD Ryzen 5 5500",
+      "tier": 12
+    },
+    {
+      "canonical_id": "amd-ryzen-7-7700",
+      "market_name": "AMD Ryzen 7 7700",
+      "tier": 18
+    },
+    {
+      "canonical_id": "intel-core-i5-8400",
+      "market_name": "Intel Core i5-8400",
+      "tier": 10
+    },
+    {
+      "canonical_id": "intel-core-i7-7700",
+      "market_name": "Intel Core i7-7700",
+      "tier": 9
+    }
+  ]
+}
