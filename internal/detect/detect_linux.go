@@ -20,7 +20,7 @@ func platformRAMBytes() (uint64, error) {
 	if err != nil {
 		return 0, fmt.Errorf("detect: opening /proc/meminfo: %w", err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
@@ -61,7 +61,7 @@ func platformOSInfo() (OSInfo, error) {
 	if err != nil {
 		return OSInfo{}, fmt.Errorf("detect: opening /etc/os-release: %w", err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	fields := map[string]string{}
 	scanner := bufio.NewScanner(f)

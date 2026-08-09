@@ -1,0 +1,7 @@
+# Force LF line endings for everything, regardless of platform/autocrlf
+# settings. Without this, GitHub's windows-latest runners (which default
+# to core.autocrlf=true) convert these LF-committed files to CRLF on
+# checkout, and gofmt -l then flags every file as unformatted — that's
+# what broke ci.yml's lint (windows-latest) job even though the exact
+# same commit passed lint (ubuntu-latest) cleanly.
+* text=auto eol=lf
