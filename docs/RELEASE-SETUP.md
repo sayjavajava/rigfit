@@ -8,13 +8,14 @@ Add these under **Settings → Secrets and variables → Actions** on the reposi
 
 | Secret | Used by | Where it comes from |
 |---|---|---|
-| `GPG_PRIVATE_KEY` | `release.yml` | `gpg --full-generate-key` (RSA 4096 or ed25519 recommended), then export the armoured private key: `gpg --export-secret-keys --armor <KEY_ID>`. Paste the full `-----BEGIN PGP PRIVATE KEY BLOCK-----` output. |
-| `GPG_FINGERPRINT` | `release.yml`, `.goreleaser.yaml` | `gpg --list-secret-keys --with-colons \| grep fpr` — the 40-character fingerprint of the same key. This is not resolved automatically from `GPG_PRIVATE_KEY`; the workflow's GPG-import step also exposes it as a step output, but the secret is kept as the explicit source of truth so `.goreleaser.yaml`'s `signs` block has a stable value. |
+| `GPG_PRIVATE_KEY` | `release.yml` | `gpg --full-generate-key` (RSA 4096 or ed25519 recommended, **no passphrase** — `release.yml`'s import step can't supply one non-interactively), then export the armoured private key: `gpg --export-secret-keys --armor <KEY_ID>`. Paste the full `-----BEGIN PGP PRIVATE KEY BLOCK-----` output. |
 | `SCOOP_TAP_TOKEN` | `.goreleaser.yaml` (`scoops`) | A **fine-grained** GitHub PAT scoped **only** to the `scoop-rigfit` repository, with Contents: read/write. Do not use a classic PAT with broader repo access. |
-| `AUR_SSH_PRIVATE_KEY` | `aur.yml` | An SSH key pair registered on your AUR account (Account → My Account → SSH Public Key). Paste the private half here. |
+| `AUR_SSH_PRIVATE_KEY` | `aur.yml` | An SSH key pair registered on your AUR account (Account → My Account → SSH Public Key), **no passphrase** (the deploy action can't supply one non-interactively either). Paste the private half here. |
 | `WINGET_PAT` | `winget.yml` | A **classic** GitHub PAT with the `public_repo` scope, created on an account that has a fork of `microsoft/winget-pkgs`. `wingetcreate` opens PRs against the upstream repo from that fork. |
 
 `GITHUB_TOKEN` is provided automatically by Actions and needs no setup.
+
+There is no `GPG_FINGERPRINT` secret — `release.yml`'s GPG-import step exposes the fingerprint of whatever key it just imported as a step output (`steps.import_gpg.outputs.fingerprint`), and `.goreleaser.yaml`'s `signs` block reads that directly. An earlier draft of this doc described a separate `GPG_FINGERPRINT` secret as the "source of truth," but the workflow never actually reads it — don't bother setting it.
 
 ## First winget submission (one-time, manual)
 
@@ -36,10 +37,10 @@ Apply these under **Settings** on the repository itself — none of this can be 
 
 ## First release checklist
 
-1. All five secrets above are set.
+1. All four secrets above are set.
 2. The repository settings above are applied.
 3. `scoop-rigfit` exists as an empty repository the `SCOOP_TAP_TOKEN` PAT can write to — GoReleaser pushes the generated manifest there, it doesn't create the repository itself.
-4. Your GPG public key is published somewhere verifiable (a keyserver, or linked from `README.md`) so `gpg --verify checksums.txt.sig checksums.txt` is actually checkable by someone who doesn't already trust you.
+4. Your GPG public key is published somewhere verifiable (a keyserver, or linked from `README.md`) so `gpg --verify checksums.txt.sig checksums.txt` is actually checkable by someone who doesn't already trust you — done, see `docs/SIGNING-KEY.asc` and `SECURITY.md`.
 5. Tag and push: `git tag v0.1.0 && git push origin v0.1.0`. `release.yml` triggers on any `v*` tag.
 6. Watch the `release` job; `aur` and `winget` run afterward and are allowed to fail without affecting the GitHub release itself (`continue-on-error: true`) — check their logs separately.
 7. `winget` won't have anything to update until the one-time manual submission above has been merged into `microsoft/winget-pkgs` — until then, expect it to fail every release, harmlessly, and that's expected rather than a sign something's broken.

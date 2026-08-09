@@ -24,7 +24,14 @@ sha256sum --check checksums.txt --ignore-missing
 gh attestation verify rigfit_<version>_<os>_<arch>.tar.gz --repo sayjavajava/rigfit
 ```
 
-The maintainer's GPG fingerprint used to sign releases is documented in `docs/RELEASE-SETUP.md` and should also be published somewhere independently verifiable (a keyserver, or a signed statement linked from the README) — don't trust a fingerprint that only appears bundled with the thing it's meant to verify.
+The maintainer's GPG public key and fingerprint (`9E86 F649 92C0 000C 232A  A8C0 5A66 C245 C2E5 979B`) are published in two independent places, so you don't have to trust a fingerprint that only appears bundled with the thing it's meant to verify:
+
+- `docs/SIGNING-KEY.asc`, in this repository.
+- [keys.openpgp.org](https://keys.openpgp.org/vks/v1/by-fingerprint/9E86F64992C0000C232AA8C05A66C245C2E5979B), an independent keyserver.
+
+```sh
+gpg --keyserver hkps://keys.openpgp.org --recv-keys 9E86F64992C0000C232AA8C05A66C245C2E5979B
+```
 
 ## Reporting a vulnerability
 
