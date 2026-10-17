@@ -3,7 +3,7 @@ module github.com/sayjavajava/rigfit
 go 1.26.5
 
 require (
-	github.com/klauspost/cpuid/v2 v2.4.0
+	github.com/klauspost/cpuid/v2 v2.4.1
 	github.com/spf13/cobra v1.10.2
 	golang.org/x/sys v0.47.0
 )
